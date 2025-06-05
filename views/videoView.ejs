@@ -210,6 +210,17 @@ textarea:focus {
  
 }
 
+#profileLink
+{
+  color: white;
+
+}
+
+#profileLink:visited
+{
+  color: white;
+}
+
 </style>
 
 <script>
@@ -314,7 +325,8 @@ textarea:focus {
   <p> Ratings count: <%= video.totalStars/5%></p>
   <p> Stars: <%= video.stars%> / <%= video.totalStars%></p>
   <p> Average rating: <%= video.averageStars%> stars</p>
-  <p> Date posted <%= video.datePosted%></p>
+  <p> Date posted: <%= video.datePosted%></p>
+  <p> Posted by: <a id="profileLink" href="/profile/<%=video.postedBy.id%>"><%=video.postedBy.username%></a>   </p>
 <br>
   <h1 style="color: white;">Tags</h1>
 
@@ -331,19 +343,20 @@ textarea:focus {
 
 <div class="rate-box">
 
+    <div id="errorBox"></div>
     <h1 style="text-align: center;">Rate</h1>
     <div class="rate-stars-container" onmouseleave="ratingBoxOut()">
 
-                    <img  class = "myStar" src="/none-left.svg" width="50px" onmouseover="gfg(1)" onclick="gfgClick(1)" >
-                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(2)" onclick="gfgClick(2)">
-                    <img  class = "myStar"src="/none-left.svg" width="50px"onmouseover="gfg(3)" onclick="gfgClick(3)">
-                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(4)" onclick="gfgClick(4)">
-                    <img  class = "myStar"src="/none-left.svg" width="50px"onmouseover="gfg(5)" onclick="gfgClick(5)">
-                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(6)" onclick="gfgClick(6)">
-                    <img  class = "myStar"src="/none-left.svg" width="50px"onmouseover="gfg(7)" onclick="gfgClick(7)">
-                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(8)" onclick="gfgClick(8)">
-                    <img  class = "myStar"src="/none-left.svg" width="50px"onmouseover="gfg(9)" onclick="gfgClick(9)">
-                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(10)" onclick="gfgClick(10)">
+                    <img  class = "myStar" src="/none-left.svg" width="50px" onmouseover="gfg(1)" onclick="whatToDo(1)" >
+                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(2)" onclick="whatToDo(2)">
+                    <img  class = "myStar"src="/none-left.svg" width="50px"onmouseover="gfg(3)" onclick="whatToDo(3)">
+                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(4)" onclick="whatToDo(4)">
+                    <img  class = "myStar"src="/none-left.svg" width="50px"onmouseover="gfg(5)" onclick="whatToDo(5)">
+                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(6)" onclick="whatToDo(6)">
+                    <img  class = "myStar"src="/none-left.svg" width="50px"onmouseover="gfg(7)" onclick="whatToDo(7)">
+                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(8)" onclick="whatToDo(8)">
+                    <img  class = "myStar"src="/none-left.svg" width="50px"onmouseover="gfg(9)" onclick="whatToDo(9)">
+                    <img  class = "myStar"src="/none-right.svg" width="50px"onmouseover="gfg(10)" onclick="whatToDo(10)">
 
 
     </div>
@@ -468,6 +481,29 @@ function gfg(n) {
     //output.innerText = "Rating is: " + n + "/5";
 }
  
+
+async function whatToDo(n)
+{
+
+  <% if(canRate) { %>
+    gfgClick(n);
+
+  <% } else {  %>
+
+cantDo()
+
+    <% }%>
+}
+
+
+function cantDo()
+{
+  var eB = document.getElementById("errorBox");
+  var newP = document.createElement("p");
+  newP.innerHTML = "You can't rate your own uploaded videos.";
+  newP.style.color = "red";
+  eB.append(newP);
+}
 
 async function   gfgClick(n) {
    // output =  document.getElementById("hidden-data");
@@ -595,73 +631,3 @@ audio.play();
 
 
 
-
-<!-- 
-<audio id="myAudio" autoplay>
-  <source src="<%=video.previewURL%>">
-  
-  Your browser does not support the audio element.
-</audio>
-<script>
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-let audio = document.getElementById("myAudio");
-audio.play()
-audio.volume = 0.0
-
-  function getSoundAndFadeAudio (audiosnippetId) {
-
-var sound = document.getElementById(audiosnippetId);
-
-// Set the point in playback that fadeout begins. This is for a 2 second fade out.
-
-  var fadePoint = sound.duration - 3; 
-var fadeBegin = 4;
-
-var fadeFull = false;
-var fadeAudio = setInterval(async function () {
-
-  console.log("Current time:" + sound.currentTime + ", Fade Point: " + fadePoint +", Volume: " + sound.volume)
-    // Only fade if past the fade out point or not at zero already
-
-
-    if ((sound.currentTime <= fadeBegin) && (sound.volume <= 0.5)) {
-     // console.log("HELLOSS")
-        sound.volume += 0.005;
-    }
-
-    else
-    {
-      fadeFull = true;
-    }
-
-
-if(fadeFull)
-{
-
-    if ((sound.currentTime >= fadePoint) && (sound.volume != 0.0)) {
-      //console.log("HELLOSS")
-      try{
-        sound.volume -= 0.01;
-      }
-      catch(e)
-      {
-        console.log(e)
-        sound.volume = 0.0;
-      }
-    }
-
-    // When volume at zero stop all the intervalling
-    if (sound.volume <= 0.0) {
-        clearInterval(fadeAudio);
-    }
-}
-}, 200);
-
-}
-audio.onloadedmetadata = function() {
-getSoundAndFadeAudio("myAudio")
-};
-</script> -->

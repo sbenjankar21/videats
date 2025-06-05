@@ -93,12 +93,27 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 
     //console.log("JALEN BRUNSON");
+    const video = await Video.findById(req.params.id).populate({path: "comments", populate: {path: "user"}}).populate("postedBy")
+    let canUserRate = true;
+      let postedByUser = await User.findById(video.postedBy._id)
+
+    if(req.isAuthenticated())
+    {
+    if(req.user._id.equals(postedByUser._id))
+    {
+canUserRate = false;
+    }
+    }
+
+    
+      
+
     var passUserRating = 0;
     // try this
     try 
     {
         // get the video from the url idanswers.findOne()
-  const video = await Video.findById(req.params.id).populate({path: "comments", populate: {path: "user"}})
+  
         if(req.user)
         {
 
@@ -124,7 +139,7 @@ router.get('/:id', async (req, res) => {
         //console.log("NEW RATING")
     }
 
-}
+        }
         //const test = await User.find().populate({path: "ratings", populate: {path: "video"}});
         //console.log(test.ratings);
         //console.log(userVids);
@@ -134,10 +149,14 @@ router.get('/:id', async (req, res) => {
         //const reviews = await Review.find({video: video}).populate(["video"])
 
         // render the page 
+        //res.redirect("/videos")
+
+
         res.render('videoView', {
             video: video,
             userR: passUserRating,
-            isLoggedIn: req.isAuthenticated()
+            isLoggedIn: req.isAuthenticated(),
+            canRate: canUserRate
             //reviews: reviews
             //booksByVideo: books
         })
@@ -150,7 +169,7 @@ router.get('/:id', async (req, res) => {
         // redirect home
         //console.log("HELLO")
         console.log(e)
-        res.redirect('/')
+        res.render('videoView', {error: "Something went wrong..."})
     }
 })
 
@@ -158,13 +177,17 @@ router.get('/:id', async (req, res) => {
 router.post('/:id', checkAuthenticated, async (req, res) => {
 
         // get the video from the url id
+const thisVideo = await Video.findById(req.params.id).populate(["postedBy"])
+      let postedByUser = await User.findById(thisVideo.postedBy._id)
+        try
+        {
 
 
      let increasing = parseInt(req.body.rating)/2
 
 
      //console.log("YOOOOOOOOOOOOOOOOOOO: " + increasing)
-        const thisVideo = await Video.findById(req.params.id).populate(["postedBy"])
+        
 
 
 // calculate the new given stars
@@ -200,7 +223,7 @@ router.post('/:id', checkAuthenticated, async (req, res) => {
       console.log("After")
       console.log(await Video.find())
       
-      let postedByUser = await User.findById(thisVideo.postedBy._id)
+
 
         let newUserStars = postedByUser.totalStars + starDifference;
         await User.updateOne({_id: thisVideo.postedBy._id}, {$set: {totalStars: newUserStars}});
@@ -242,9 +265,19 @@ router.post('/:id', checkAuthenticated, async (req, res) => {
 
     } 
 
-    //console.log(await Rating.find())
+    
 
-        
+res.sendStatus(201);
+}
+
+catch(e)
+{
+        //res.sendStatus(401);
+        console.log(e);
+         //q.flash('error', e.toString());
+         res.sendStatus(403);
+}
+
 
 //console.log();
 
@@ -253,7 +286,7 @@ router.post('/:id', checkAuthenticated, async (req, res) => {
 
 
 
-res.sendStatus(201);
+
 
 })
 

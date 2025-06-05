@@ -164,10 +164,9 @@ console.log(tags);
 
 
         // render the html FIX IT BITCHHH IT DOESNT WORK
-        res.render('videos/new',{
-            video: vids[0],
-            errorMessage: 'review made'
-        })
+        console.log("dupe")
+        res.redirect("/videos/" + vids[0]._id)
+
         
     }
              
