@@ -3,16 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VidEats</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+       
+ :root {
+  scrollbar-color: #828282 #1a1a1a;
+}
+
+input, button, select, textarea, optgroup, option {
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+
+
+    .feed
+        {
+            
+            width: 600px;
+            height: auto;
+            text-align: center;
+        }
+
+        #feed_holder
+        {
+            display: flex;;
+            justify-content: space-evenly;
+        }
+
+        .feed_item
+        {
+            background-color: rgb(39, 39, 39);
+        }
+
+        .feed_image
+        {
+            width: 100%;
+        }
+
+        .video_feed_text
+        {
+            color:white;
+              font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  
+
+  padding: 0px;
+  margin: 10px 5px
+        }
+
+        .star
+        {
+            width: 40px;
+        }
+
+        
+        .vInfo
+        {
+            height: 18px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            
+            color: rgb(245,245,245);
+        }
+
+        .item
+        {
+            margin: 20px 70px 20px 20px;
+           width: 75%;
+            height: fit-content;
+            padding: 10px;
+            background-color: rgb(10,10,10);
+            display: inline-block;
+            text-decoration: none;
+            
+            
+        }
+
+        .vid-item
+        {
+            transition: transform 0.2s;
+
+        }
+        .vid-item:hover
+        {
+            transform: scale(1.1);
+        }
+
+        .vid-item:visited { text-decoration: none; color:rgb(255, 255, 255); }
+        .img
+        {
+            width: 360px;
+            height: 202.5px;
+            display: inline-block;
+            position: relative;
+           
+        }
+
+        span
+        {
+            font-family: "Roboto", sans-serif;
+        }
+
+        .mainbutton 
+{
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    display:inline-block;
+    width:120px;
+    padding:10px;
+    box-sizing:border-box;
+    text-align:center;
+    font-size:16px;
+    margin: 10px;
+    color:rgb(219, 219, 219);
+
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+        .loginbutton 
+{
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    display:inline-block;
+    width:120px;
+    padding:10px;
+    box-sizing:border-box;
+    text-align:center;
+    font-size:16px;
+    margin: 10px;
+    color:rgb(0, 0, 0);
+    background-color: #d3d3d3;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+.mainbutton:hover 
+{
+    background:rgba(248, 100, 100,20);
+
+    /* transition:0.7s; */
+    /*width:130px; */
+    cursor:pointer;
+}
+
+.loginbutton:hover 
+{
+    background:rgba(248, 100, 100,20);
+
+    /* transition:0.7s; */
+    /*width:130px; */
+    cursor:pointer;
+}
+.p2{
+    color: rgb(207, 63, 63);
+    font-size: 25px;
+    text-align: center;
+}
+
+body 
+{
+    background-color: rgb(243, 243, 243);
+    background-color: rgb(7, 7, 7);
+    color:rgb(220, 220, 220);
+    margin-top: 0px;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    margin: 0px 0px 0px 0px;
+    
+
+
+}
+
+#sub-div
+    {
+        margin: auto;
+        display: flex;
+        /* background-color: black;
+        width: 1000px;
+        height: 350px; */
+       /* align-items: center; */
+       justify-content: center;
+       padding-top: 30vh;
+       
+    }
+    .form-container
+    {
+        display: flex;
+  
+  height: 100%; 
+    }
+    </style>
 </head>
 <body>
+
+
+    <header style="position: sticky; top: 0;z-index: 999; background-color: rgb(7, 7, 7);;" >
+        <nav style = "height: 80px;">
+            <a href="/" class="mainbutton home-buton p2">VidEats</a>
+        
+        
+        <a class="mainbutton button1" href="/" >Home</a>
+            <a class="mainbutton button3" href="/videos">Videos</a>
+            
+           <a class = "mainbutton button4" href="/upload" >Upload</a>
+           <a class = "mainbutton button4" href="/leaderboard" >Leaderboard</a>
+           
+           <a class = "mainbutton button4" href="/profile" >Profile</a>
+           <!-- 
+           <a class = "mainbutton button4" href="/albums" >Albums</a>
+           <a class = "mainbutton button4" href="/movies" >Movies</a>
+           <a class = "mainbutton button4" href="/reviews/new" >New Review</a>
+        -->
+
+        <% if (isLoggedIn) { %>
+                   <form  style="display: inline-block;" action="/logout?_method=DELETE" method = "POST">
+    <button style="color: black; border: none;" class="mainbutton"  type="submit">Log Out</button>
+  </form>
+        <% } else {%>
+            <a  class = "loginbutton" href="/login" >Login</a>
+
+    <%    }%>
+       
+
+
+
+    </nav>
+    </header>
     
-Before
-<br>
-<%- body %>
-<br>
-After
-
-
+   <%- body %>
 </body>
 </html>

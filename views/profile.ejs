@@ -1,0 +1,704 @@
+
+<style>
+
+    /* body {
+        animation: fadeInAnimation ease 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+    @keyframes fadeInAnimation {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+     */
+    
+    #overview-container
+    {    animation: fadeInAnimation ease 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    
+       background-color: rgb(54, 54, 54); /*ignore */
+       display:flex;
+    
+       
+    }
+    
+    @keyframes fadeInAnimation {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .video-div
+    {
+      /* float: left; */
+      padding-left: 70px;
+      padding-top: 50px;
+     
+      flex: 1 1 0;
+    }
+    .reviews-div
+    {
+      /* float: left; */
+       /* display: flex;  */
+      
+      justify-content: center;
+      
+
+
+	  flex: 3 1 0;
+	  min-width: 0;
+	 
+	 padding: 50px 70px 0px 70px 
+      
+    }
+    
+
+    body{
+		height: 100px;
+		
+		 background-color: rgb(54, 54, 54);
+	}
+     
+
+    
+    
+    
+    
+    
+    
+        .review-username
+        {
+          font-size: 20px;
+          float: left;
+          margin-top: 10px;
+          text-decoration: none;
+          color: white;
+        }
+    
+        .review-profile-image
+        {
+          border-radius: 50%;
+          float: left;
+          margin-left: 30px;
+          margin-right: 15px;
+          width: 50px;
+        }
+        .name-profile-holder
+        {
+          margin-top: 20px;
+          width: 100%;
+          height: 55px;
+        }
+    
+        .star-containera
+        {
+          padding-left: 25px;
+        }
+        .star-one{
+          /* float: left; */
+        }
+        .review-content
+        {
+          margin-left: 30px;
+          color: rgb(221, 221, 221);
+        }
+    
+        .average-stars-container
+        {
+          /* display: inline; */
+          display: flex;
+          height: 50px;
+          
+        }
+    
+        .average-star-amount
+        {
+          margin-right: 10px;
+          color: white;
+        }
+        .average-star-total
+        {
+          margin-left: 10px;
+          color: white;
+        }
+    
+        .star-svg
+        {
+    
+        }
+        .favorite-song-holder
+        {
+          margin: 0px auto 0px auto;
+          display: flex;
+          justify-content: center;
+          margin-bottom: 50px;
+          width: 80%;
+        }
+    
+        .favorite-movie-holder
+        {
+          margin: 0px auto 0px auto;
+          display: flex;
+          justify-content: center;
+          margin-bottom: 50px;
+          width: 80%;
+        }
+    
+        .favorite-video-holder
+        {
+          margin: 0px auto 0px auto;
+          display: flex;
+          justify-content: center;
+          margin-bottom: 50px;
+          width: 80%;
+        }
+    
+    
+        /* .favorite-song-item
+        {
+          margin: auto auto;
+          background-color: rgb(176, 72, 128);
+        } */
+    
+    
+        .favorite-song-item
+        {
+          margin: auto auto;
+          width: 200px;
+          height: 270px;
+          padding: 10px;
+          background-color: rgb(10, 10, 10);
+          display:inline-block;
+          transition: transform 0.2s;
+        }
+    
+        .favorite-movie-item
+        {
+          margin: auto auto;
+          width: 200px;
+     
+          padding: 10px;
+          background-color: rgb(10, 10, 10);
+          display:inline-block;
+          transition: transform 0.2s;
+        }
+    
+    
+          .favorite-song-item:hover
+          {
+            transform: scale(1.1);
+          }
+    
+          /* .song-img
+        {
+          display: inline-block;
+          position: relative;
+          margin-top: 10px;
+        }
+    
+        .vInfo
+        {
+          height: 5px;
+          margin-top: 10px;
+          margin-bottom:  10px;
+          font-size: 15px;
+          color: rgb(245, 245, 245);
+    
+        } */
+
+        .itemProfile
+        {
+            margin: 20px auto 20px auto;
+            
+            width: 360px;
+            height: 310px;
+            padding: 10px;
+            background-color: rgb(10,10,10);
+          /*  display: inline-block;*/
+        }
+
+
+
+        
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+  max-width: 100%;
+  max-height: 680px;
+  overflow-y: auto;
+ 
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+
+
+
+.vid-title
+{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* adds ... */
+  max-width: 100%; 
+
+}
+
+.info-div
+{
+  
+  min-width: 0;
+}
+
+.vid-entry
+{
+	
+	display: flex; 
+	background-color: rgb(17, 17, 17); 
+	margin-bottom: 5px;
+	text-overflow: ellipsis;
+	overflow-x: hidden;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.2s;
+  height: fit-content;
+	
+}
+.vid-entry:visited
+{
+  color:white;
+}
+
+.vid-entry:hover
+{
+  background-color: var(--hover-color);
+}
+        .entry-img
+        {
+            width: 360px;
+            height: 202.5px;
+            display: inline-block;
+            position: relative;
+           
+        }
+
+
+        .comment-entry
+        {
+          /* margin: auto; */
+          margin: 25px auto 0px auto;
+          display:block; 
+          width: 75%;
+          height: 170px;
+          padding: 10px;
+          background-color: rgb(10, 10, 10);
+          /* margin-top: 10px; */
+          /* transition: background-color 0.2s; */
+          transition: transform 0.2s;
+          text-decoration: none;
+        }
+
+        .comment-entry:visited
+        {
+          color: white;
+        }
+
+               .comment-entry:hover
+        {
+          transform: scale(1.1);
+          /* background-color: rgb(0, 90, 0); */
+    
+        }
+    
+    </style>
+
+    
+
+
+<div id="overview-container">
+
+	<div class="video-div">
+
+		
+		<% if (isMain) { %>
+
+		<img style="margin: 0px auto 0px auto; display: block;" src="download.png">
+
+  		<% } else {%>
+
+		<img style="margin: 0px auto 0px auto; display: block;" src="../download.png">
+
+		<% }%>
+
+  		<p style="color: white; font-size: 30px; margin: 15px  0px; text-align: center;"> <%= user.username %></p>
+
+		<br>
+		<hr>
+
+  		<p><%= user.totalStars%> totals stars</p>
+  		<p> <%= user.totalUploaded%> videos posted</p>
+  		<p>  <%= (user.totalStars / user.possibleStars * 5).toFixed(2)%> stars average per video</p>
+
+		
+  
+	</div>
+
+
+
+	<div class="reviews-div">
+		
+
+		
+		<div class="tab">
+  			<button class="tablinks active" onclick="openTab(event, 'Uploaded')">Uploaded</button>
+  			<button class="tablinks" onclick="openTab(event, 'Rated')">Rated</button>
+  			<button class="tablinks" onclick="openTab(event, 'Comments')">Comments</button>
+		</div>
+
+	
+		<div id="Uploaded" class="tabcontent" style="display: block;">
+			
+			<% for(var i = 0; i < user.uploadedVideos.length; i ++)  {%>
+
+			<a href="../videos/<%=user.uploadedVideos[i]._id%>" class="vid-entry" style="--hover-color: rgb(<%= user.uploadedVideos[i].backgroundColor%>)">
+			
+				<img class = "entry-img" src="<%=user.uploadedVideos[i].imageAddress%>" alt="Lamp" width="50">
+			
+				<div class="info-div" style="margin-left: 15px;">
+				
+ 					<p class="vid-title"> <%= user.uploadedVideos[i].title%></p>
+					
+  					<p> <%= user.uploadedVideos[i].author%></p>
+
+					<div style=" width: fit-content" >
+    
+						<% if(user.uploadedVideos[i].averageStars === 5.0) { %>
+      
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+     
+						<% } else if(user.uploadedVideos[i].averageStars >= 4.3) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star-half.svg">
+
+						<% } else if(user.uploadedVideos[i].averageStars >= 3.8) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/empty.svg">
+      
+      					<% } else if(user.uploadedVideos[i].averageStars >= 3.3) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star-half.svg">
+						<img class="star" src="/empty.svg">
+
+						<% } else if(user.uploadedVideos[i].averageStars >= 2.8) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+          				<% } else if(user.uploadedVideos[i].averageStars >= 2.3) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star-half.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+						<% } else if(user.uploadedVideos[i].averageStars >= 1.8) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+						<% } else if(user.uploadedVideos[i].averageStars >= 1.3) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star-half.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+                		<% } else if(user.uploadedVideos[i].averageStars >= 0.8) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+						<% }  else if(user.uploadedVideos[i].averageStars>=0.3){%>
+
+						<img class="star" src="/star-half.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+                  		<% }  else {%>
+
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+                  		<% } %>
+
+        			</div>
+				
+ 				</div>
+			
+			</a>
+
+      <% } %> 
+
+		</div>
+
+
+
+
+
+
+
+
+		
+
+		<div id="Rated" class="tabcontent">
+      		
+			<% for(var i = 0; i < user.ratings.length; i ++)  {%>
+
+        	<a href="../videos/<%=user.ratings[i].video._id%>" class="vid-entry" style="--hover-color: rgb(<%= user.ratings[i].video.backgroundColor%>)">
+
+				<img class = "entry-img" src="<%=user.ratings[i].video.imageAddress%>" alt="Lamp" width="50">
+
+				<div class="info-div" style="margin-left: 15px;">
+
+ 					<p class="vid-title"> <%= user.ratings[i].video.title%></p>
+  					<p> <%=user.ratings[i].video.author%></p>
+
+					<div style=" margin-left:auto; margin-right: auto; width: fit-content" >
+
+    					<% if(user.ratings[i].video.averageStars === 5.0) { %>
+      
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+     
+						<% } else if(user.ratings[i].video.averageStars >= 4.3) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star-half.svg">
+
+						<% } else if(user.ratings[i].video.averageStars >= 3.8) {%>
+						
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/empty.svg">
+      
+      					<% } else if(user.ratings[i].video.averageStars >= 3.3) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star-half.svg">
+						<img class="star" src="/empty.svg">
+
+        				<% } else if(user.ratings[i].video.averageStars>= 2.8) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+          				<% } else if(user.ratings[i].video.averageStars >= 2.3) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star-half.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+						<% } else if(user.ratings[i].video.averageStars >= 1.8) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+						<% } else if(user.ratings[i].video.averageStars >= 1.3) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/star-half.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+						<% } else if(user.ratings[i].video.averageStars >= 0.8) {%>
+
+						<img class="star" src="/star.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+                  		<% }  else if(user.ratings[i].video.averageStars>=0.3){%>
+
+						<img class="star" src="/star-half.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+                  		<% }  else {%>
+
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+						<img class="star" src="/empty.svg">
+
+                  		<% } %>
+
+        			</div>
+
+ 				</div>
+
+			</a>
+
+       		<% } %> 
+
+		</div>
+
+		<div id="Comments" class="tabcontent">
+
+			<% for(var i = 0; i < user.comments.length; i ++)  {%>
+
+			<a href="../videos/<%= user.comments[i].video._id%>" class="comment-entry" title= "On <%=user.comments[i].video.title%>">
+
+				<div class = "name-profile-holder">
+
+					<% if (isMain) { %>
+
+					<img class = "review-profile-image" src = "download.png" alt="">
+
+					<% } else {%>
+
+					<img class = "review-profile-image" src = "../download.png" alt="">
+				
+					<% }%>
+			
+					<p class="review-username"><%= user.username%></p>
+
+				</div>
+		
+
+				<p class = "review-content" id = "overflo"> <%= user.comments[i].body%></p>
+			
+			</a>
+
+			<% } %> 
+		</div>
+
+		
+	</div>
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+//openTab(event, "Uploaded")
+  function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+</script>

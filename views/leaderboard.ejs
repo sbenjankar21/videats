@@ -1,0 +1,135 @@
+
+
+<style>
+
+#leaderboard-container
+{
+width: 75%;
+margin: 10px auto 5px auto;
+}
+
+#table-info
+{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(29, 29, 29);
+    
+    
+}
+.table-entry
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#leaderboard-table
+{
+    margin: 50px auto 5px auto;
+    width: 75%;
+    font-size: 25px;
+    border-spacing: 0;
+    text-align: center;
+}
+
+   .review-profile-image
+    {
+      border-radius: 50%;
+      float: left;
+      margin-left: 30px;
+      margin-right: 15px;
+      width: 50px;
+      position: relative;
+    }
+
+    tr:nth-child(even) {
+  background-color: #222222;
+}
+
+
+tr
+{
+    
+}
+
+tbody tr
+{
+    transition: background-color 0.2s;
+}
+
+tbody tr:hover { 
+   background-color: rgb(143, 143, 143); 
+}
+td a { 
+   display: block; 
+   
+   padding: 16px; 
+   text-decoration: none;
+   color: white;
+}
+
+td a:visited { text-decoration: none; color:rgb(255, 255, 255); }
+
+thead tr{
+    background-color: #cacaca;
+    color: black;
+}
+</style>
+
+
+
+<table id="leaderboard-table">
+    <thead>
+
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                Username
+            </th>
+            <th>
+                Total Stars 
+            </th>
+            <th>
+                Average Rating
+            </th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+
+        <% var pos = 1;%>
+        <% users.forEach(user => { %>
+
+
+<tr>
+
+<% if(pos === 1) {%>
+
+
+<td><a style = "color: gold;"  href = "/profile/<%=user.id%>"><%=pos%></a></td>
+<% } else if(pos === 2) {%>
+<td><a style = "color: silver;"  href = "/profile/<%=user.id%>"><%=pos%></a></td>
+
+<% } else if(pos === 3) {%>
+<td><a style = "color: #CE8946;"  href = "/profile/<%=user.id%>"><%=pos%></a></td>
+
+<% } else { %>
+<td><a href = "/profile/<%=user.id%>"><%=pos%></a></td>
+
+    <% } %>
+<td><a href = "/profile/<%=user.id%>"><%=user.username%></a></td>
+<td><a href = "/profile/<%=user.id%>"><%=user.totalStars%></a></td>
+<td><a href = "/profile/<%=user.id%>"><%=(user.totalStars / user.possibleStars * 5).toFixed(2)%></a></td>
+
+
+
+</tr>
+
+<% pos++%>
+    <% }) %>
+
+
+    </tbody>
+</table>

@@ -1,0 +1,548 @@
+<style>
+.vid-item
+{
+  transition: transform 0.2s, background-color 0.2s;
+  background-color: rgb(17, 17, 17); 
+}
+
+.vid-item:hover{
+  transform: scale(1.1);
+ 
+  background-color: var(--hover-color);
+}
+
+  .wrapper {
+  max-width: 100%;
+  overflow: hidden; 
+  height: auto;
+  white-space: nowrap;
+}
+
+#overflow 
+{
+    white-space:nowrap;
+    max-width:15em;
+    overflow:hidden;
+}
+
+.marquee {
+  white-space: nowrap;
+   /* overflow: hidden;  */
+   height: 18px;
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
+
+.marquee p {
+  display: inline-block;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+
+}
+
+
+
+input:focus {
+    outline: none;
+    border: none;
+}
+
+
+
+
+
+
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+#myInput {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.opt {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.opt:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+.search-tag
+{
+  background-color: beige;
+  margin-right: 5px;
+  color: black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.vid-title
+{
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+.vid-entry
+{
+            margin: 20px 70px 20px 20px;
+           width: 75%;
+            height: fit-content;
+            padding: 10px;
+            background-color: rgb(10,10,10);
+            display: inline-block;
+            text-decoration: none;
+            
+}
+
+.info-div
+{
+  margin-left: 15px;
+  min-width: 0;
+}
+
+
+</style>
+
+
+<div style="margin-left: 20px;">
+<h2> Search Videos</h2>
+<form action ="/videos" method="GET" id="myForm">
+
+<input type ="text" name="name" value="<%= searchOptions.name%>" placeholder="Search" style="border-radius: 17.5px; border: none; font-size: 20px; background-color:rgb(31, 31, 31); height: 40px; caret-color: white; color: white; padding-left: 10px;" size="50" >
+
+<select id = "mySelect" name="sort" id="cars" style="font-size: 20px; color: white; background-color: rgb(31, 31, 31); border: none;height: 40px; padding-left: 10px;"  >
+  <!-- <option value="" selected disabled hidden>Choose here</option> -->
+  <option value="a">Newest</option>
+  <option value="b">Oldest</option>
+  <option value="c">Average Rating</option>
+  <option value="d">Title</option>
+</select>
+
+<!--
+<input style="display: inline-block; width: 45px;""> 
+<p style="display: inline-block;">> Video Length ></p>
+<input style="display: inline-block; width: 45px;"> 
+-->
+
+<div class="dropdown">
+  <div onclick="myFunction()" class="dropbtn">Add tag +</div>
+  <div id="myDropdown" class="dropdown-content">
+    <div style="display:flex;">
+
+
+    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+    <div onclick="addTag(event)"   style="font-size: 40px; width: 48px; text-align: center; background-color: #3e8e41;">
+      +
+    </div>
+    </div>    
+
+    <div style="max-height: 400px; overflow-y: scroll;">
+    <div class="opt" onclick="optionClicked(event)">Basketball</div>
+    <div class="opt" onclick="optionClicked(event)">Video Essay</div>
+    <div class="opt" onclick="optionClicked(event)">Funny</div>
+    <div class="opt" onclick="optionClicked(event)">Fortnite</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    <div class="opt" onclick="optionClicked(event)">Minecraft</div>
+    </div>
+  
+
+  </div>
+</div>
+
+
+
+<button>Search</button>
+</form>
+
+
+<p style="display: inline-block;">Tags:</p>
+
+<div style="display: flex;" id="tagsBox">
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+<script>
+///Array.isArray(data) ? data : [data])
+var tags = <%-JSON.stringify(Array.isArray(tags) ? tags : [tags])%>;
+var tb = document.getElementById("tagsBox");
+ var mF = document.getElementById("myForm");
+for(var i = 0; i < tags.length; i++)
+{
+  console.log("HELLLO??");
+  var newP = document.createElement("p");
+  newP.innerHTML = tags[i];
+  newP.classList.add("search-tag");
+  tb.append(newP);
+
+ 
+  var newInput = document.createElement("input");
+
+  newInput.type = "hidden";
+  newInput.name = "tags";
+  newInput.value = tags[i];
+  mF.append(newInput);
+}
+console.log("HELLO");
+console.log(tags);
+console.log(tags.length);
+console.log("dsadsa");
+function optionClicked(evt)
+{
+
+  var mInput = document.getElementById("myInput");
+
+  mInput.value = evt.currentTarget.innerHTML;
+filterFunction()
+}
+
+function addTag(evt)
+{
+  var mForm = document.getElementById("myForm");
+  var newInput = document.createElement("input");
+  var currInput = document.getElementById("myInput")
+  newInput.type = "hidden";
+  newInput.name = "tags";
+  newInput.value = currInput.value;
+  mForm.append(newInput);
+
+  var tBox = document.getElementById("tagsBox");
+  var newP = document.createElement("p");
+  newP.innerHTML = currInput.value;
+  newP.classList.add("search-tag");
+
+
+  tBox.append(newP);
+  
+}
+
+function addTagFromArray()
+{
+  
+}
+
+
+
+
+var tags = [];
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  const input = document.getElementById("myInput");
+  const filter = input.value.toUpperCase();
+  const div = document.getElementById("myDropdown");
+  const a = div.getElementsByClassName("opt");
+  for (let i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+
+
+
+
+
+
+
+
+//////////////////////////////
+
+
+  var temp = "<%=searchOptions.sort%>";
+  var mySelect = document.getElementById('mySelect');
+ // console.log(temp)
+  for(var i, j = 0; i = mySelect.options[j]; j++) {
+      if(i.value == temp) {
+          mySelect.selectedIndex = j;
+          break;
+      }
+  }
+
+
+
+
+
+
+
+  var rDiv
+  document.addEventListener("DOMContentLoaded", function(e) { 
+    rDiv = document.getElementById("myResults")
+var titles = document.getElementsByClassName("wrapper")
+
+console.log(titles.length)
+console.log(i)
+
+for (var i =0; i<titles.length;i++) {
+ // console.log(titles[i].innerHTML + ":" + titles[i].clientWidth)
+ var temp = titles[i].children[0].innerHTML
+  if(titles[i].clientWidth < titles[i].scrollWidth || titles[i].clientHeight < titles[i].scrollHeight)
+{
+  console.log(titles[i].innerHTML)
+
+  titles[i].replaceChildren()
+
+  // margin-top: 10px;
+  // margin-bottom:  5px;
+var mDiv = document.createElement("div")
+mDiv.className = "marquee"
+
+mDiv.style.height = "fit-content"
+titles[i].appendChild(mDiv)
+var firstText = document.createElement("p")
+firstText.innerHTML = temp+"&nbsp;"
+firstText.style.margin = "10px 0px 10px 0px"
+firstText.style.fontSize = "15px"
+firstText.style.color = "rgb(255,255,255)"
+firstText.style.fontSize = "20px";
+firstText.classList.add("vInfo");
+mDiv.appendChild(firstText)
+
+var secondText = document.createElement("p")
+secondText.innerHTML = temp
+secondText.style.margin = "10px 0px 10px 0px"
+secondText.style.fontSize = "15px"
+secondText.style.color = "rgb(255,255,255)"
+secondText.style.fontSize = "20px";
+secondText.classList.add("vInfo");
+mDiv.appendChild(secondText)
+
+}
+
+
+//var pElement = titles[i].parentNode
+//console.log(pElement)
+
+// pElement.replaceChildren()
+
+// var mDiv = document.createElement("div")
+// mDiv.className = "marquee"
+// pElement.appendChild(mDiv)
+// var firstText = document.createElement("p")
+// firstText.innerHTML = temp+"&nbsp;"
+// mDiv.appendChild(firstText)
+
+// var secondText = document.createElement("p")
+// secondText.innerHTML = temp
+// mDiv.appendChild(secondText)
+
+
+
+
+        }
+})
+  
+
+
+
+
+var css = 'table td:hover{ background-color: #00ff00 }';
+var style = document.createElement('style');
+
+if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+} else {
+    style.appendChild(document.createTextNode(css));
+}
+
+document.getElementsByTagName('head')[0].appendChild(style);
+
+
+  </script>
+<br>
+
+
+<% videos.forEach(video => { %>
+
+  
+  <% var i = 0; %>
+    <!-- <a href = "/videos/<%=video.id%>"><div><%=video.title%></div></a> -->
+    <!-- <a href = "<%= video.link%>" target="_blank"> -->
+
+    <!--
+    <a href = "/videos/<%=video.id%>">
+        <div class = "item vid-item">
+          <img class = "img" src="<%=video.imageAddress%>" alt="Lamp" width="50">
+          <p class = "vInfo" id = "overflo"> <span style ="font-size: 20px; "></span><br> <span style="font-size: 12.5px; color:rgb(170, 170, 170)"></span></p>
+        </div>
+    </a> 
+-->
+
+
+
+<a class = "item vid-item" style="display: flex; margin-bottom: 5px; --hover-color: rgb(<%= video.backgroundColor%>)" href = "/videos/<%=video.id%>" title="<%=video.title%>">
+
+        
+<img class = "img" src="<%=video.imageAddress%>" alt="Lamp" width="50">
+<div class="info-div"  >
+ <p  class="vid-title" > <%= video.title%></p>
+  <p style="color: rgb(170,170,170);"> <%= video.author%></p>
+
+
+   <div style=" margin-left: 10px; width: fit-content" >
+    <% if(video.averageStars === 5.0) { %>
+      
+      <img class="star" src="/star.svg">
+      <img class="star" src="/star.svg">
+      <img class="star" src="/star.svg">
+      <img class="star" src="/star.svg">
+      <img class="star" src="/star.svg">
+     
+
+      <% } else if(video.averageStars >= 4.3) {%>
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star-half.svg">
+
+      <% } else if(video.averageStars >= 3.8) {%>
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star.svg">
+        <img class="star" src="/empty.svg">
+      
+      
+      <% } else if(video.averageStars >= 3.3) {%>
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star.svg">
+        <img class="star" src="/star-half.svg">
+        <img class="star" src="/empty.svg">
+
+        <% } else if(video.averageStars >= 2.8) {%>
+          <img class="star" src="/star.svg">
+          <img class="star" src="/star.svg">
+          <img class="star" src="/star.svg">
+          <img class="star" src="/empty.svg">
+          <img class="star" src="/empty.svg">
+          <% } else if(video.averageStars >= 2.3) {%>
+            <img class="star" src="/star.svg">
+            <img class="star" src="/star.svg">
+            <img class="star" src="/star-half.svg">
+            <img class="star" src="/empty.svg">
+            <img class="star" src="/empty.svg">
+            <% } else if(video.averageStars >= 1.8) {%>
+              <img class="star" src="/star.svg">
+              <img class="star" src="/star.svg">
+              <img class="star" src="/empty.svg">
+              <img class="star" src="/empty.svg">
+              <img class="star" src="/empty.svg">
+              <% } else if(video.averageStars >= 1.3) {%>
+                <img class="star" src="/star.svg">
+                <img class="star" src="/star-half.svg">
+                <img class="star" src="/empty.svg">
+                <img class="star" src="/empty.svg">
+                <img class="star" src="/empty.svg">
+                <% } else if(video.averageStars >= 0.8) {%>
+                  <img class="star" src="/star.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <% }  else if(video.averageStars>=0.3){%>
+
+                  <img class="star" src="/star-half.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <% }  else {%>
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <img class="star" src="/empty.svg">
+                  <% } %>
+        </div>
+ </div>
+</a>
+
+
+
+
+
+
+
+<% i++; %>
+
+
+
+
+
+<% }) %>
