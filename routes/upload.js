@@ -81,7 +81,7 @@ async function httpGet(theUrl)
 
 router.get('/', checkAuthenticated, (req, res) => {
 
-    res.render('upload', {isLoggedIn: req.isAuthenticated()});
+    res.render('upload', {isLoggedIn: req.isAuthenticated(), tabTitle: "Upload to VidEats"});
 })
 
 

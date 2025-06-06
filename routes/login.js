@@ -28,7 +28,7 @@ router.get('/', notAuthenticated,(req, res) => {
         from = "/"+req.query.from;
     }
 
-    res.render('login',{from: from, layout: false})
+    res.render('login',{from: from, layout: false,  tabTitle: "Login to VidEats"})
 })
 
 

@@ -15,7 +15,7 @@ function checkAuthenticated(req, res, next)
 
 router.get('/', checkAuthenticated, async (req, res) => {
 
-    res.render('profile', {user: req.user, isLoggedIn: req.isAuthenticated(), isMain: true});
+    res.render('profile', {user: req.user, isLoggedIn: req.isAuthenticated(), isMain: true, tabTitle: req.user.username + " - VidEats"});
 })
 
 
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
 
     const currentUser = await User.findById(req.params.id).populate({ path: 'friends uploadedVideos', options: { retainNullValues: true } }).populate({path: "comments", populate: {path: "video"}}).populate({path: "ratings", populate: {path: "video"}});
 
-    res.render('profile', {user: currentUser, isLoggedIn: req.isAuthenticated(), isMain: false});
+    res.render('profile', {user: currentUser, isLoggedIn: req.isAuthenticated(), isMain: false, tabTitle: currentUser.username + " - VidEats"});
 })
 
 

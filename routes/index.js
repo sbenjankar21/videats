@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     var vidsSortedByTop = await Video.find().sort({averageStars: -1});
     vidsSortedByTop = vidsSortedByTop.filter((vids) => isToday(vids.datePosted))
 
-    res.render('index', {newVids: vidsToday, bestToday: vidsSortedByTop, isLoggedIn: req.isAuthenticated()});
+    res.render('index', {newVids: vidsToday, bestToday: vidsSortedByTop, isLoggedIn: req.isAuthenticated(), tabTitle: "VidEats"});
 })
 
 module.exports = router;

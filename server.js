@@ -51,7 +51,7 @@ const videosRouter = require('./routes/videos');
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 const leaderboardRouter = require('./routes/leaderboard')
-
+const halloffameRouter = require('./routes/halloffame')
 
 // set the view engine
 app.set('view engine', 'ejs')
@@ -120,6 +120,7 @@ app.use('/videos', videosRouter);
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 app.use('/leaderboard', leaderboardRouter)
+app.use('/halloffame', halloffameRouter)
 
 //allows us to delete
 app.delete('/logout', (req, res) => {

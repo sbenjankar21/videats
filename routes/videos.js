@@ -71,7 +71,8 @@ router.get('/', async (req, res) => {
             videos: videos, 
             searchOptions: req.query,
             tags: tags,
-            isLoggedIn: req.isAuthenticated()
+            isLoggedIn: req.isAuthenticated(),
+            tabTitle: "Find videos on VidEats"
         })
     }
 
@@ -136,7 +137,8 @@ router.get('/:id', async (req, res) => {
             video: video,
             userR: passUserRating,
             isLoggedIn: req.isAuthenticated(),
-            canRate: canUserRate
+            canRate: canUserRate,
+            tabTitle: video.title + " - VidEats"
             //reviews: reviews
             //booksByVideo: books
         })
@@ -149,7 +151,16 @@ router.get('/:id', async (req, res) => {
         // redirect home
         //console.log("HELLO")
         console.log(e)
-        res.render('videoView', {error: "Something went wrong..."})
+                res.render('videoView', {
+            video: video,
+            userR: passUserRating,
+            isLoggedIn: req.isAuthenticated(),
+            canRate: canUserRate,
+            tabTitle: video.title + " - VidEats",
+            error: "Something went wrong..."
+            //reviews: reviews
+            //booksByVideo: books
+        })
     }
 })
 

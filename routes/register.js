@@ -63,7 +63,7 @@ router.post('/', notAuthenticated,async (req, res) => {
     catch(e){
 
         console.log(e)
-        res.render('register', {error: e, layout: false})
+        res.render('register', {error: e, layout: false, tabTitle: "Register a VidEats account"})
     }
 })
 module.exports = router

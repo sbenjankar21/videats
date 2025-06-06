@@ -24,7 +24,7 @@ router.get('/',  async (req, res) => {
 
 const users = await User.find().sort({totalStars: -1})
 
-    res.render('leaderboard', {users: users,isLoggedIn: req.isAuthenticated()});
+    res.render('leaderboard', {users: users,isLoggedIn: req.isAuthenticated(), tabTitle: "Leaderboard"});
 
 })
 
