@@ -17,7 +17,9 @@ function notAuthenticated(req, res, next)
 
 // index router
 router.get('/',notAuthenticated, async (req, res) => {
+
     res.render('register',{layout: false, error: null})
+
 })
 
 
@@ -34,6 +36,7 @@ router.post('/', notAuthenticated,async (req, res) => {
         {
             throw Error("This email already exists")
         }
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
         // create a new user with details
@@ -47,7 +50,6 @@ router.post('/', notAuthenticated,async (req, res) => {
             totalUploaded: 0,
             totalRated: 0,
 
-
         })
 
         //save the user
@@ -59,8 +61,8 @@ router.post('/', notAuthenticated,async (req, res) => {
 
     //otherwise do this
     catch(e){
-        console.log(e)
 
+        console.log(e)
         res.render('register', {error: e, layout: false})
     }
 })

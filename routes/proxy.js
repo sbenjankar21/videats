@@ -27,12 +27,11 @@ router.get('/',  async (req, res) => {
             method: 'get',
             url: req.query.link,
             responseType: 'arraybuffer'
-        })
+    })
     
     // give the original calls response in the proxy response
     res.header("content-type", original.headers['content-type']).send(Buffer.from(original.data, 'binary'))
 
-    console.log("working gng");
     } 
     
     //otherwise
@@ -40,7 +39,7 @@ router.get('/',  async (req, res) => {
     {
         console.log(e)
         res.redirect('/')
-        console.log("u?hh")
+        
     }
 })
 

@@ -13,11 +13,13 @@ function checkAuthenticated(req, res, next)
 
     res.redirect('/login?from=upload')
 }
-function getSecondPart(str) {
-    var mySubString
 
+function getSecondPart(str) {
+    
+    var mySubString
     if(str.indexOf("https://youtu.be/") !== -1)
     {
+        
         mySubString = str.substring(
             str.lastIndexOf("/") + 1, 
             str.indexOf("?")
@@ -85,90 +87,96 @@ router.get('/', checkAuthenticated, (req, res) => {
 
 
 router.post('/', checkAuthenticated, async (req, res) =>{
-console.log(req.body);
-var link = req.body.link;
-var tags = req.body.tags;
 
-console.log(link);
-console.log(tags);
+    var vidID = req.body.id;
+
+
     try
     {
-    // video api link
+        // video api link
 
-    var vidId = getSecondPart(link);
-    var url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&id='+vidId+'&fields=items(id,snippet)&key=AIzaSyARlc8Jj0BqWyLS7DpFbkyZ6SHNyUepuqQ'
+        var url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&id='+vidID+'&fields=items(id,snippet)&key=AIzaSyARlc8Jj0BqWyLS7DpFbkyZ6SHNyUepuqQ'
 
-    // make a request to the api and record the response in vid
-    var vid = await httpGet(url)
+        // make a request to the api and record the response in vid
+        var vid = await httpGet(url)
 
-    // look for vides with the same imageAddress
-    var vids = await Video.find({imageAddress: "https://img.youtube.com/vi/"+vidId+"/hq720.jpg"});
+        // look for vides with the same imageAddress
+        var vids = await Video.find({imageAddress: "https://img.youtube.com/vi/"+vidID+"/hq720.jpg"});
 
     // ion know why i did this but too lazy to fix it
     //var videoJson = vid //------
 
-    // create a new video
-    const video = new Video(
-    {
-        title: vid.items[0].snippet.title,
-        link: link,
-        author: vid.items[0].snippet.channelTitle,
-        totalStars: 0,
-        stars: 0,
-        datePosted: Date.now(),
-        imageAddress: "https://img.youtube.com/vi/"+vidId+"/hq720.jpg",
-        averageStars: 0,
-        youtubeId: vidId,
-        backgroundColor: req.body.bgcolor,
-        tags: req.body.tags,
-        postedBy: req.user
-    })
 
-
-    // if vids length is 0 that means its a new video
-    if(vids.length === 0)
-    {
-
-        try
+        var vidAddress = "";
+        if(req.body.imageMax)
         {
-            // save the video
-            const newVideo = await video.save()
+            vidAddress = "https://img.youtube.com/vi/"+vidID+"/hq720.jpg";
+        }
+        else
+        {
+            vidAddress = "https://i.ytimg.com/vi/"+vidID+"/mqdefault.jpg"
+            
+            
+        }
 
-            //cib
-            await User.updateOne({_id: req.user._id}, {$set:{totalUploaded:  req.user.totalUploaded + 1}, $push: { uploadedVideos: newVideo }})
-             //await User.updateOne({ _id: req.user.id }, )
-            // redirect to the new video's page
-            res.redirect(`videos/${newVideo.id}`)
+        // create a new video
+        const video = new Video(
+        {
+            title: vid.items[0].snippet.title,
+            link: "https://www.youtube.com/watch?v="+vidID,
+            author: vid.items[0].snippet.channelTitle,
+            totalStars: 0,
+            stars: 0,
+            datePosted: Date.now(),
+            imageAddress: vidAddress,
+            averageStars: 0,
+            youtubeId: vidID,
+            backgroundColor: req.body.bgcolor,
+            tags: req.body.tags,
+            postedBy: req.user
+        })
+
+
+        // if vids length is 0 that means its a new video
+        if(vids.length === 0)
+        {
+
+            try
+            {
+                // save the video
+                const newVideo = await video.save()
+
+                //cib
+                await User.updateOne({_id: req.user._id}, {$set:{totalUploaded:  req.user.totalUploaded + 1}, $push: { uploadedVideos: newVideo }})
+                //await User.updateOne({ _id: req.user.id }, )
+                // redirect to the new video's page
+                res.redirect(`videos/${newVideo.id}`)
+
+            }
+
+            // on error do this
+            catch(e)
+            {
+                // log the error and render the page agian with an error message
+                console.log(e)
+                res.render('upload',{
+                    video: video,
+                    errorMessage: 'Error Creating Video...'
+                })
+            }
+            
 
         }
 
-        // on error do this
-        catch(e)
+        // otherwise the video already exists
+        else
         {
-            // log the error and render the page agian with an error message
-            console.log(e)
-            res.render('/',{
-                video: video,
-                errorMessage: 'Error Creating Video...'
-            })
+
+
+            res.redirect("/videos/" + vids[0]._id)
+
+            
         }
-        console.log("the video was saved gng");
-
-        const testVideos = await Video.find();
-        console.log(testVideos);
-    }
-
-    // otherwise the video already exists
-    else
-    {
-
-
-        // render the html FIX IT BITCHHH IT DOESNT WORK
-        console.log("dupe")
-        res.redirect("/videos/" + vids[0]._id)
-
-        
-    }
              
     }
 
@@ -177,7 +185,7 @@ console.log(tags);
     {
         // log the error and render the page again with an error message
         console.log(e)
-        res.render('videos/new',{
+        res.render('videos',{
             video: {link: req.body.name},
             errorMessage: 'Error Creating Video...',
             isLoggedIn: req.isAuthenticated()

@@ -236,7 +236,7 @@ var tb = document.getElementById("tagsBox");
  var mF = document.getElementById("myForm");
 for(var i = 0; i < tags.length; i++)
 {
-  console.log("HELLLO??");
+  //console.log("HELLLO??");
   var newP = document.createElement("p");
   newP.innerHTML = tags[i];
   newP.classList.add("search-tag");
@@ -250,10 +250,10 @@ for(var i = 0; i < tags.length; i++)
   newInput.value = tags[i];
   mF.append(newInput);
 }
-console.log("HELLO");
-console.log(tags);
-console.log(tags.length);
-console.log("dsadsa");
+//console.log("HELLO");
+//console.log(tags);
+//console.log(tags.length);
+//console.log("dsadsa");
 function optionClicked(evt)
 {
 
@@ -344,15 +344,15 @@ function filterFunction() {
     rDiv = document.getElementById("myResults")
 var titles = document.getElementsByClassName("wrapper")
 
-console.log(titles.length)
-console.log(i)
+//console.log(titles.length)
+//console.log(i)
 
 for (var i =0; i<titles.length;i++) {
  // console.log(titles[i].innerHTML + ":" + titles[i].clientWidth)
  var temp = titles[i].children[0].innerHTML
   if(titles[i].clientWidth < titles[i].scrollWidth || titles[i].clientHeight < titles[i].scrollHeight)
 {
-  console.log(titles[i].innerHTML)
+  //console.log(titles[i].innerHTML)
 
   titles[i].replaceChildren()
 

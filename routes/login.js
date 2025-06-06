@@ -20,12 +20,14 @@ function notAuthenticated(req, res, next)
 
 // WEBSITE/login router
 router.get('/', notAuthenticated,(req, res) => {
+
     var from = "";
+
     if(req.query.from)
     {
         from = "/"+req.query.from;
     }
-    console.log(req.query)
+
     res.render('login',{from: from, layout: false})
 })
 
@@ -33,16 +35,21 @@ router.get('/', notAuthenticated,(req, res) => {
 
 // post router, and authenticate credentials
 router.post('/',  notAuthenticated, passport.authenticate('local',{
+
     failureRedirect: '/login',
     failureFlash: true
+
 }), (req, res) => { 
     
-var from = "";
-if(req.query.from)
-{
-    from = req.query.from;
-}
-    res.redirect('.'+from)})
+    var from = "";
+    if(req.query.from)
+    {
+        from = req.query.from;
+    }
+    
+    res.redirect('.'+from);
+
+})
 
 
 

@@ -43,53 +43,17 @@
         }
 
     }
-    //     const imageUrlToBase64 = async (url) => {
-    //     const data = await fetch(url,
-    //         {
-    //             method: "get",
-    //             mode: "no-cors"
-    //         }
-    //     )
-    //     const blob = await data.blob();
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(blob);
-    //     reader.onload = async () => {
-    //         const base64data = reader.result;
-    //         return await base64data
-    //     }
-    
-      
-        
-    // }
-    // console.log( imageUrlToBase64("https://img.youtube.com/vi/BTWPDboW38o/hq720.jpg"))
 
 
-    console.log("hello");
-    
+ 
     function getSecondPart(str) {
-        var mySubString ="";
-    
-        if(str.indexOf("https://youtu.be/") !== -1)
-        {
-            mySubString = str.substring(
-                str.lastIndexOf("/") + 1, 
-                str.indexOf("?")
-            );
+        var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = str.match(regExp);
+        if (match && match[2].length == 11) {
+            return match[2];
+        } else {
+            //error
         }
-        
-        else if(str.indexOf("&") !== -1)
-        {
-            mySubString = str.substring(
-                str.indexOf("=") + 1, 
-                str.indexOf("&")
-            );
-        }
-    
-        else
-        {
-            mySubString = str.split('=')[1];
-        }
-        return mySubString;
     }
         // var newImage = document.createElement('img')
         // newImage.style.display = "none"
@@ -112,7 +76,7 @@
         containerDiv.replaceChildren();
     
         var thisLink = document.getElementById("enter-link");
-        console.log(vid);
+        //console.log(vid);
         <% /* %>
         //<iframe width="560" height="315" src="https://www.youtube.com/embed/<%=video.youtubeId%>?si=zFv2_59A4Zgvz29U&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
        
@@ -306,11 +270,11 @@
      
     // Funtion to update rating
     function gfg(n) {
-        console.log("CONFIRM");
+       // console.log("CONFIRM");
         output =  document.getElementById("hidden-data");
         remove();
-        console.log(stars);
-        console.log(n);
+        //console.log(stars);
+       // console.log(n);
         for (let i = 0; i < n; i++) {
     
             stars[i].src = "star.svg"
@@ -347,12 +311,33 @@
         
     }
 
+    function dooDat(a)
+    {
+        if(a)
+    {
+        //console.log("YAYYYYYYYY");
+    }
+    else
+    {
+       // console.log("BOOOOOOO");
+    }
+    }
+
     
+function imageExists(image_url){
 
+    var http = new XMLHttpRequest();
 
+    http.open('HEAD', image_url, false);
+    http.send();
+
+    return http.status != 404;
+
+}
      async function sendData(s)
 {
-    console.log("HERERE" + tags);
+    var vidID = getSecondPart(s);
+    //console.log("HERERE" + tags);
     var rting = document.getElementById("hidden-data")
     var txarea = document.getElementById("text-area")
     var color
@@ -363,9 +348,34 @@
     newImage.style.width = "500px"
     //newImage.crossOrigin = 'Anonymous';
     //newImage.src = "https://img.youtube.com/vi/"+getSecondPart(lnk.value)+"/hq720.jpg"
+    var currentAddy = "https://img.youtube.com/vi/"+vidID+"/hq720.jpg";
+    var useReg = true;
 
-    newImage.src = "/proxy?link="+"https://img.youtube.com/vi/"+getSecondPart(s)+"/hq720.jpg"
+   if(imageExists(currentAddy))
+   {
+
+   }
+   else
+   {
+
+   
+       // console.log('NO EXISTO?');
     
+        currentAddy = "https://i.ytimg.com/vi/"+vidID+"/hqdefault.jpg"
+        useReg = false;
+    
+ }
+
+    try
+    {
+        
+    newImage.src = "/proxy?link="+currentAddy;
+    }
+
+    catch(e)
+    {
+        //console.log("womp AHHHHHHHH");
+    }
     document.body.appendChild(newImage);
 
 
@@ -374,8 +384,8 @@
         
         color =  colorThief.getColor(newImage);
 
-        console.log(rting.value)
-        console.log(color)
+        //console.log(rting.value)
+       // console.log(color)
 
 
     try{
@@ -390,9 +400,10 @@
 
         body: JSON.stringify({
             test: 1,
-            link: s,
+            id: vidID,
             tags: tags,
-            bgcolor: color.toString()
+            bgcolor: color.toString(),
+            imageMax: useReg
         })
     })
 

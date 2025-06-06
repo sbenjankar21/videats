@@ -63,8 +63,6 @@ const userSchema = new mongoose.Schema({
         ref: "Comment"
     }
 
-
-
 })
 
 module.exports = mongoose.model('User', userSchema)

@@ -223,9 +223,7 @@ textarea:focus {
 
 </style>
 
-<script>
-  console.log("<%=video.averageStars%>");
-</script>
+
 <div id="overview-container">
 
 <div class="video-div">
@@ -425,7 +423,7 @@ textarea:focus {
 let stars = document.getElementsByClassName("myStar");
 
 async function newComment() {
-console.log("HELLLOOOO")
+//console.log("HELLLOOOO")
   var commentBody = document.getElementById("myText").value;
 
      try
@@ -462,8 +460,8 @@ console.log("HELLLOOOO")
 function gfg(n) {
    // output =  document.getElementById("hidden-data");
     remove();
-    console.log(stars)
-    console.log(n)
+    //console.log(stars)
+    //console.log(n)
     for (let i = 0; i < n; i++) {
 
         if(i % 2 === 0)
@@ -510,8 +508,8 @@ async function   gfgClick(n) {
     //remove();
     chosen = true;
     numStars = n;
-    console.log(stars)
-    console.log(n)
+    //console.log(stars)
+    //console.log(n)
     for (let i = 0; i < n; i++) {
 
         if(i % 2 === 0)
@@ -582,8 +580,8 @@ function remove() {
 
 function ratingBoxOut()
 {
-  console.log("LEABING");
-  console.log(numStars);
+  //console.log("LEABING");
+  //console.log(numStars);
   if(chosen)
   {
      remove();
